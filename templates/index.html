@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medieval Adventure</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .container { width: 80%; margin: 0 auto; }
+        .status { margin-bottom: 20px; }
+        .form-group { margin-bottom: 10px; }
+        .form-group label { margin-right: 10px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Medieval Adventure</h1>
+        <div class="status">
+            <pre>{{ status }}</pre>
+        </div>
+        <form action="{{ url_for('choose_route') }}" method="post">
+            <div class="form-group">
+                <label for="route">Choose Route:</label>
+                <input type="text" id="route" name="route">
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+        <form action="{{ url_for('gather_gold') }}" method="post">
+            <div class="form-group">
+                <label for="amount">Gather Gold:</label>
+                <input type="number" id="amount" name="amount">
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+        <form action="{{ url_for('fight') }}" method="post">
+            <button type="submit">Fight</button>
+        </form>
+        <form action="{{ url_for('level_up') }}" method="post">
+            <button type="submit">Level Up</button>
+        </form>
+        <form action="{{ url_for('buy_bloodline') }}" method="post">
+            <div class="form-group">
+                <label for="bloodline">Buy Bloodline:</label>
+                <select id="bloodline" name="bloodline">
+                    {% for bloodline in shop.bloodlines %}
+                        <option value="{{ bloodline.name }}">{{ bloodline.name }} ({{ bloodline.purity }})</option>
+                    {% endfor %}
+                </select>
+                <button type="submit">Buy</button>
+            </div>
+        </form>
+        <form action="{{ url_for('found_kingdom') }}" method="post">
+            <div class="form-group">
+                <label for="name">Found Kingdom:</label>
+                <input type="text" id="name" name="name">
+                <button type="submit">Found</button>
+            </div>
+        </form>
+        <form action="{{ url_for('develop_city') }}" method="post">
+            <button type="submit">Develop City</button>
+        </form>
+        <form action="{{ url_for('manage_resources') }}" method="post">
+            <div class="form-group">
+                <label for="resource_type">Resource Type:</label>
+                <select id="resource_type" name="resource_type">
+                    <option value="wood">Wood</option>
+                    <option value="stone">Stone</option>
+                    <option value="food">Food</option>
+                </select>
+                <label for="amount">Amount:</label>
+                <input type="number" id="amount" name="amount">
+                <button type="submit">Manage</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,30 @@
+# .github/workflows/deploy.yml
+name: Deploy to Heroku
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Deploy to Heroku
+        uses: akshnz/heroku-deploy@v1.0.2
+        with:
+          app_name: ${{ secrets.HEROKU_APP_NAME }}
+          api_key: ${{ secrets.HEROKU_API_KEY }}
